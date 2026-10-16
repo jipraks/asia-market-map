@@ -1,0 +1,149 @@
+{
+  "generatedAt": "2026-10-16T03:45:17.295Z",
+  "indices": [
+    {
+      "country": "JPN",
+      "countryName": "Jepang",
+      "ticker": "^N225",
+      "name": "Nikkei 225",
+      "price": 65421.1,
+      "prevClose": 64425.9492,
+      "change": 995.1508,
+      "changePct": 1.5446,
+      "marketTime": "2026-10-16T03:30:05.000Z",
+      "status": "buka"
+    },
+    {
+      "country": "HKG",
+      "countryName": "Hong Kong",
+      "ticker": "^HSI",
+      "name": "Hang Seng",
+      "price": 24305.37,
+      "prevClose": 24062.7207,
+      "change": 242.6493,
+      "changePct": 1.0084,
+      "marketTime": "2026-10-16T03:30:02.000Z",
+      "status": "buka"
+    },
+    {
+      "country": "IDN",
+      "countryName": "Indonesia",
+      "ticker": "^JKSE",
+      "name": "IHSG",
+      "price": 5223.251,
+      "prevClose": 5863.7798,
+      "change": -640.5288,
+      "changePct": -10.9235,
+      "marketTime": "2026-10-16T03:35:10.000Z",
+      "status": "buka"
+    },
+    {
+      "country": "KOR",
+      "countryName": "Korea Selatan",
+      "ticker": "^KS11",
+      "name": "KOSPI",
+      "price": 5732.16,
+      "prevClose": 5554.2202,
+      "change": 177.9398,
+      "changePct": 3.2037,
+      "marketTime": "2026-10-16T03:25:10.000Z",
+      "status": "buka"
+    },
+    {
+      "country": "TWN",
+      "countryName": "Taiwan",
+      "ticker": "^TWII",
+      "name": "TAIEX",
+      "price": 47092.06,
+      "prevClose": 46969.8711,
+      "change": 122.1889,
+      "changePct": 0.2601,
+      "marketTime": "2026-10-16T03:25:05.000Z",
+      "status": "buka"
+    },
+    {
+      "country": "SGP",
+      "countryName": "Singapura",
+      "ticker": "^STI",
+      "name": "Straits Times",
+      "price": 5442.72,
+      "prevClose": 5403.5,
+      "change": 39.22,
+      "changePct": 0.7258,
+      "marketTime": "2026-10-16T03:30:11.000Z",
+      "status": "buka"
+    },
+    {
+      "country": "MYS",
+      "countryName": "Malaysia",
+      "ticker": "^KLSE",
+      "name": "FTSE Bursa Malaysia KLCI",
+      "price": 1613.45,
+      "prevClose": 1623.7,
+      "change": -10.25,
+      "changePct": -0.6313,
+      "marketTime": "2026-10-16T03:29:45.000Z",
+      "status": "buka"
+    },
+    {
+      "country": "THA",
+      "countryName": "Thailand",
+      "ticker": "^SET.BK",
+      "name": "SET",
+      "price": 1573.01,
+      "prevClose": 1577.53,
+      "change": -4.52,
+      "changePct": -0.2865,
+      "marketTime": "2026-10-15T09:47:56.000Z",
+      "status": "tutup"
+    },
+    {
+      "country": "IND",
+      "countryName": "India",
+      "ticker": "^BSESN",
+      "name": "Sensex",
+      "price": 74315.61,
+      "prevClose": 72781.8906,
+      "change": 1533.7194,
+      "changePct": 2.1073,
+      "marketTime": "2026-10-15T10:02:29.000Z",
+      "status": "tutup"
+    },
+    {
+      "country": "CHN",
+      "countryName": "Tiongkok",
+      "ticker": "000001.SS",
+      "name": "Shanghai Composite",
+      "price": 3742.149,
+      "prevClose": 3707.4761,
+      "change": 34.6729,
+      "changePct": 0.9352,
+      "marketTime": "2026-10-16T03:30:00.000Z",
+      "status": "buka"
+    },
+    {
+      "country": "PHL",
+      "countryName": "Filipina",
+      "ticker": "PSEI.PS",
+      "name": "PSEi",
+      "price": 5780.91,
+      "prevClose": 5663.1699,
+      "change": 117.7401,
+      "changePct": 2.079,
+      "marketTime": "2026-10-16T03:30:00.000Z",
+      "status": "buka"
+    },
+    {
+      "country": "VNM",
+      "countryName": "Vietnam",
+      "ticker": "^VNINDEX.VN",
+      "name": "VN-Index",
+      "price": 1711.48,
+      "prevClose": 1698.35,
+      "change": 13.13,
+      "changePct": 0.7731,
+      "marketTime": "2026-10-16T03:30:10.000Z",
+      "status": "buka"
+    }
+  ]
+}

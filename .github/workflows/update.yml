@@ -1,0 +1,56 @@
+name: Update data & deploy
+
+on:
+  schedule:
+    # Tiap 15 menit, 00:00–11:59 UTC (07:00–18:59 WIB), Senin–Jumat
+    - cron: '*/15 0-11 * * 1-5'
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      # Data lama diambil dari situs live sebagai fallback; kalau semua ticker gagal,
+      # data lama tetap dipakai dan deploy tetap jalan.
+      - name: Fetch indices
+        run: node scripts/fetch-indices.mjs
+        continue-on-error: true
+        env:
+          PAGES_URL: ${{ steps.pages.outputs.base_url }}
+
+      - name: Prepare site
+        run: |
+          mkdir -p _site
+          cp -r index.html assets data _site/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

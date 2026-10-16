@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Peta Indeks Saham Asia</title>
+  <meta name="description" content="Naik turun indeks saham per negara Asia dalam peta animasi.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>Peta Indeks Saham Asia</h1>
+      <p class="updated" id="updated">Memuat data…</p>
+    </div>
+    <p class="note">Data tertunda ±15 menit, sumber Yahoo Finance, bukan saran investasi.</p>
+  </header>
+
+  <main class="layout">
+    <section class="map-wrap" aria-label="Peta perubahan indeks">
+      <div id="map" class="map"></div>
+      <div class="legend" aria-hidden="true">
+        <span>−3%</span>
+        <div class="legend-bar"></div>
+        <span>+3%</span>
+        <span class="legend-nodata"><i></i>Tanpa data</span>
+      </div>
+    </section>
+
+    <aside class="panel" aria-label="Daftar indeks">
+      <h2>Peringkat hari ini</h2>
+      <ol id="list" class="list"></ol>
+    </aside>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
