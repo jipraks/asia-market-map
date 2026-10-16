@@ -6,6 +6,16 @@
   const PULSE_MS = 450;
   // Nama pendek untuk label di peta (tooltip & panel tetap pakai nama lengkap).
   const MAP_LABEL = { '^KLSE': 'KLCI' };
+  // ISO alpha-3 -> file bendera di assets/flags/ (flag-icons, kode alpha-2).
+  const FLAG = {
+    JPN: 'jp', HKG: 'hk', IDN: 'id', KOR: 'kr', TWN: 'tw', SGP: 'sg',
+    MYS: 'my', THA: 'th', IND: 'in', CHN: 'cn', PHL: 'ph', VNM: 'vn',
+  };
+  const flagUrl = (country) => (FLAG[country] ? `assets/flags/${FLAG[country]}.svg` : null);
+  const flagImg = (country) => {
+    const src = flagUrl(country);
+    return src ? `<img class="flag" src="${src}" alt="" width="18" height="14">` : '';
+  };
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -16,14 +26,14 @@
       downLo: '#f3b8b5', downHi: '#c62828',
       zero: '#b0b6bd', nodata: '#e3e6ea', nodataHover: '#d3d8de',
       border: '#ffffff', text: '#1c2024', halo: 'rgba(255,255,255,0.9)',
-      tipBg: '#ffffff', tipBorder: '#e1e5ea', muted: '#5f6b76',
+      tipBg: '#ffffff', tipBorder: '#e1e5ea', muted: '#5f6b76', flagBorder: 'rgba(0,0,0,0.45)',
     },
     dark: {
       upLo: '#2e5b42', upHi: '#3fbf7a',
       downLo: '#6b3534', downHi: '#e05250',
       zero: '#4a525c', nodata: '#262c34', nodataHover: '#323943',
       border: '#0f1216', text: '#e7eaee', halo: 'rgba(15,18,22,0.85)',
-      tipBg: '#171b21', tipBorder: '#2a3039', muted: '#9aa5b1',
+      tipBg: '#171b21', tipBorder: '#2a3039', muted: '#9aa5b1', flagBorder: 'rgba(255,255,255,0.6)',
     },
   };
   const palette = () => PALETTES[darkQuery.matches ? 'dark' : 'light'];
@@ -103,8 +113,10 @@
     if (!d || !revealed.has(d.country)) return '';
     const cls = d.changePct > 0 ? 'up' : d.changePct < 0 ? 'down' : 'flat';
     // Layar sempit: cukup persen, nama indeks ada di tooltip dan daftar.
-    if (isCompact()) return `{${cls}|${fmtPct(d.changePct)}}`;
-    return `{name|${MAP_LABEL[d.ticker] || d.name}}\n{${cls}|${fmtPct(d.changePct)}}`;
+    const flag = FLAG[d.country] ? ` {f_${d.country}|}` : '';
+    // Layar sempit: bendera di atas persen supaya label tetap ramping.
+    if (isCompact()) return `${flag.trim() ? flag.trim() + '\n' : ''}{${cls}|${fmtPct(d.changePct)}}`;
+    return `{name|${MAP_LABEL[d.ticker] || d.name}}${flag}\n{${cls}|${fmtPct(d.changePct)}}`;
   }
 
   function tooltipFormatter(params) {
@@ -119,12 +131,25 @@
     return `
       <div style="min-width:190px">
         <div style="font-weight:700">${esc(d.countryName)}</div>
-        <div style="color:${p.muted};margin-bottom:6px">${esc(d.name)} · ${esc(d.ticker)}</div>
+        <div style="color:${p.muted};margin-bottom:6px;display:flex;align-items:center;gap:6px">${esc(d.name)}${flagImg(d.country)} · ${esc(d.ticker)}</div>
         <div style="font-size:1.15em;font-weight:700">${nf2.format(d.price)}</div>
         <div style="color:${color};font-weight:600">${nfSigned.format(d.change)} (${fmtPct(d.changePct)})</div>
         <div style="color:${p.muted};margin-top:6px">Update: ${fmtDateTime(d.marketTime)}</div>
         <div>${status}</div>${stale}
       </div>`;
+  }
+
+  // Gaya rich text per bendera: gambar SVG sebagai background kotak 4:3.
+  function flagStyles() {
+    const h = isCompact() ? 9 : 10.5;
+    return Object.fromEntries(Object.keys(FLAG).map((c) => [`f_${c}`, {
+      width: h * 4 / 3,
+      height: h,
+      borderRadius: 1.5,
+      borderColor: palette().flagBorder,
+      borderWidth: 1,
+      backgroundColor: { image: flagUrl(c) },
+    }]));
   }
 
   function baseOption() {
@@ -165,6 +190,7 @@
             up: { fontSize: isCompact() ? 10 : 12, color: p.upHi, fontWeight: 700 },
             down: { fontSize: isCompact() ? 10 : 12, color: p.downHi, fontWeight: 700 },
             flat: { fontSize: isCompact() ? 10 : 12, color: p.muted, fontWeight: 700 },
+            ...flagStyles(),
           },
         },
         labelLayout: { hideOverlap: false },
@@ -181,7 +207,7 @@
       const cls = d.changePct > 0 ? 'up' : d.changePct < 0 ? 'down' : '';
       return `
         <li tabindex="0" data-country="${esc(d.country)}">
-          <span class="idx-name">${esc(d.name)}${d.stale ? '<span class="stale">data lama</span>' : ''}</span>
+          <span class="idx-name">${esc(d.name)}${flagImg(d.country)}${d.stale ? '<span class="stale">data lama</span>' : ''}</span>
           <span class="idx-country">${esc(d.countryName)} · ${d.status === 'buka' ? 'Buka' : 'Tutup'}</span>
           <span class="idx-pct ${cls}">${fmtPct(d.changePct)}<small>${nf2.format(d.price)}</small></span>
         </li>`;

@@ -99,7 +99,8 @@ h1 { margin: 0; font-size: 1.35rem; }
 .list li:hover, .list li:focus-visible { background: var(--bg); outline: none; }
 .list li.active { background: var(--selected); }
 
-.idx-name { font-weight: 600; }
+.idx-name { font-weight: 600; display: flex; align-items: center; gap: 6px; }
+.flag { width: 18px; height: 13.5px; border-radius: 2px; box-shadow: 0 0 0 1px var(--border); flex: none; }
 .idx-country { grid-column: 1; font-size: 0.8rem; color: var(--muted); }
 .idx-pct { grid-row: 1 / span 2; grid-column: 2; align-self: center; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
 .idx-pct small { display: block; font-weight: 400; font-size: 0.75rem; color: var(--muted); }

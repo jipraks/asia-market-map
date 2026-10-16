@@ -15,6 +15,7 @@ index.html
 assets/style.css
 assets/app.js
 assets/asia.geo.json       Natural Earth 110m, Asian countries (+ HKG & SGP from 50m)
+assets/flags/              country flags from flag-icons (MIT)
 scripts/fetch-indices.mjs
 data/indices.json          sample data for local development
 .github/workflows/update.yml
@@ -75,8 +76,9 @@ Optional environment variables for the script:
 
    `country` must be an ISO alpha-3 code present in `assets/asia.geo.json` (the `ISO_A3` property). Keep one index per country, since the map is colored per country. `countryName` is shown in the UI, so write it in Indonesian.
 3. If the country is missing from the GeoJSON (for example a small country not included at the 110m scale), add its feature from Natural Earth 50m with `ISO_A3` and `NAME` properties. The optional `cp: [lon, lat]` property sets the label position.
-4. If the index name is too long for a map label, add a short name to `MAP_LABEL` in `assets/app.js`.
-5. Run `node scripts/fetch-indices.mjs` and check the output.
+4. Add the country's flag: download `flags/4x3/{alpha-2}.svg` from [flag-icons](https://github.com/lipis/flag-icons) (MIT) into `assets/flags/`, add `width="640" height="480"` to its root `<svg>` tag (needed to draw it on the map canvas), and map the ISO alpha-3 code to the alpha-2 file name in `FLAG` in `assets/app.js`.
+5. If the index name is too long for a map label, add a short name to `MAP_LABEL` in `assets/app.js`.
+6. Run `node scripts/fetch-indices.mjs` and check the output.
 
 ## Indices
 
